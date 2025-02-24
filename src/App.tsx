@@ -1,7 +1,19 @@
-import React from 'react';
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { MessageCircle, Brain, Shield, Phone, Heart, Award, Star, Users } from 'lucide-react';
+
+// Define types for the props
+interface FeatureCardProps {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+}
+
+interface StatCardProps {
+  icon: React.ComponentType<{ className?: string }>;
+  value: string;
+  label: string;
+}
 
 const GlowingBackground = () => (
   <div className="absolute inset-0 overflow-hidden">
@@ -11,7 +23,7 @@ const GlowingBackground = () => (
   </div>
 );
 
-const FeatureCard = ({ icon: Icon, title, description }) => (
+const FeatureCard = ({ icon: Icon, title, description }: FeatureCardProps) => (
   <Card className="bg-white/5 backdrop-blur-lg border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
     <CardContent className="p-6">
       <div className="bg-gradient-to-r from-purple-500 to-indigo-500 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
@@ -23,7 +35,7 @@ const FeatureCard = ({ icon: Icon, title, description }) => (
   </Card>
 );
 
-const StatCard = ({ icon: Icon, value, label }) => (
+const StatCard = ({ icon: Icon, value, label }: StatCardProps) => (
   <Card className="bg-white/5 backdrop-blur-lg border-purple-500/20">
     <CardContent className="p-6 flex items-center space-x-4">
       <div className="bg-gradient-to-r from-purple-500 to-indigo-500 w-12 h-12 rounded-lg flex items-center justify-center">
