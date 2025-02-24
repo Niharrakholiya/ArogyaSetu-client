@@ -1,8 +1,34 @@
-import { CloudinaryContext, Image, Transformation } from 'cloudinary-react';
-import React, { useState } from 'react';
+import { CloudinaryImage } from '@/components/ui/cloudinary-image';
+import React,{ useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, Brain, Shield, Phone, Heart, Award, Activity, Zap, Clock, Smartphone } from 'lucide-react';
+
+// Add interfaces for component props
+interface FeatureCardProps {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+}
+
+interface Step {
+  id: number;
+  title: string;
+  icon: React.ComponentType<{ className?: string }>;
+  description: string;
+  color: string;
+}
+
+interface Feature {
+  title: string;
+  icon: React.ComponentType<{ className?: string }>;
+  description: string;
+}
+
+interface TeamMember {
+  name: string;
+  role: string;
+}
 
 // Parallax effect component
 const GlowingBackground = () => (
@@ -12,9 +38,8 @@ const GlowingBackground = () => (
     <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000" />
   </div>
 );
-const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUD_NAME; // Replace with your actual cloud name
 
-const FeatureCard = ({ icon: Icon, title, description }) => (
+const FeatureCard = ({ icon: Icon, title, description }: FeatureCardProps) => (
   <Card className="bg-white/5 backdrop-blur-lg border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
     <CardContent className="p-6">
       <div className="bg-gradient-to-r from-purple-500 to-indigo-500 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
@@ -29,7 +54,7 @@ const FeatureCard = ({ icon: Icon, title, description }) => (
 const HealthJourneyMap = () => {
   const [activeStep, setActiveStep] = useState(1);
   
-  const steps = [
+  const steps: Step[] = [
     {
       id: 1,
       title: "Health Concern",
@@ -60,7 +85,7 @@ const HealthJourneyMap = () => {
     }
   ];
   
-  const features = [
+  const features: Feature[] = [
     {
       title: "Voice Message Support",
       icon: MessageCircle,
@@ -268,7 +293,7 @@ const HealthJourneyMap = () => {
 };
 
 const ArogyaSetuLanding = () => {
-  const team = [
+  const team: TeamMember[] = [
     { name: "Nihar Rakholiya", role: "AI/ML Lead" },
     { name: "Lakhman Parmar", role: "WhatsApp Integration Lead" },
     { name: "Neil Patel", role: "Text-to-Speech Integration Lead" },
@@ -279,47 +304,46 @@ const ArogyaSetuLanding = () => {
   const teamImagePublicId = "pnjtnljjphkhqvfpp5ao";
 
   return (
-    <CloudinaryContext cloudName={CLOUDINARY_CLOUD_NAME}>
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
       <GlowingBackground />
       
       {/* Hero Section */}
       <div className="relative pt-20 pb-32 px-4">
         <div className="max-w-7xl mx-auto text-center">
-            {/* Hackathon Winner Banner */}
-            <div className="inline-flex items-center bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-full px-6 py-2 mb-8 backdrop-blur-sm border border-purple-500/20">
-              <Award className="w-5 h-5 text-purple-400 mr-2" />
-              <span className="text-purple-300">🏆 DUHacks 4.0  - Best Healthcare Innovation</span>
-            </div>
+          {/* Hackathon Winner Banner */}
+          <div className="inline-flex items-center bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-full px-6 py-2 mb-8 backdrop-blur-sm border border-purple-500/20">
+            <Award className="w-5 h-5 text-purple-400 mr-2" />
+            <span className="text-purple-300">🏆 DUHacks 4.0  - Best Healthcare Innovation</span>
+          </div>
 
-            <h1 className="text-6xl md:text-8xl font-bold mb-6">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400">
-                आरोग्य सेतु
-              </span>
-            </h1>
-            <p className="text-2xl md:text-3xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              AI-Powered Healthcare Companion on WhatsApp
-            </p>
-            <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-              Transforming healthcare access through WhatsApp - because health guidance should be just a message away.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg"
-                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700
-                text-white text-lg px-8 py-6 rounded-xl shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
-              >
-                <Phone className="mr-2 h-5 w-5" /> Try on WhatsApp
-              </Button>
-              <Button 
-                size="lg"
-                variant="outline"
-                className="border-purple-500/30 text-purple-400 hover:bg-purple-500/10 text-lg px-8 py-6 rounded-xl"
-              >
-                <MessageCircle className="mr-2 h-5 w-5" /> Watch Demo
-              </Button>
-            </div>
+          <h1 className="text-6xl md:text-8xl font-bold mb-6">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400">
+              आरोग्य सेतु
+            </span>
+          </h1>
+          <p className="text-2xl md:text-3xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            AI-Powered Healthcare Companion on WhatsApp
+          </p>
+          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+            Transforming healthcare access through WhatsApp - because health guidance should be just a message away.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700
+              text-white text-lg px-8 py-6 rounded-xl shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
+            >
+              <Phone className="mr-2 h-5 w-5" /> Try on WhatsApp
+            </Button>
+            <Button 
+              size="lg"
+              variant="outline"
+              className="border-purple-500/30 text-purple-400 hover:bg-purple-500/10 text-lg px-8 py-6 rounded-xl"
+            >
+              <MessageCircle className="mr-2 h-5 w-5" /> Watch Demo
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -442,14 +466,16 @@ const ArogyaSetuLanding = () => {
             Team IndustryInnovators - The minds behind आरोग्य सेतु
           </p>
           
-          {/* Team group photo using Cloudinary */}
+          {/* Team group photo */}
           <div className="mb-16">
             <div className="relative mx-auto max-w-4xl overflow-hidden rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 p-2">
               <div className="rounded-lg overflow-hidden">
-                <Image publicId={teamImagePublicId} className="w-full h-[640px] object-cover object-center">
-                  <Transformation height="640" crop="fill" gravity="center" />
-                  <Transformation quality="100" fetchFormat="auto" />
-                </Image>
+                <CloudinaryImage
+                  publicId={teamImagePublicId}
+                  className="w-full h-[640px] object-cover object-center"
+                  alt="Team IndustryInnovators"
+                  height={640}
+                />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900/90 to-transparent p-6">
                   <h3 className="text-xl font-semibold text-white mb-2">Team IndustryInnovators</h3>
                   <p className="text-gray-300 mb-4">
@@ -512,7 +538,6 @@ const ArogyaSetuLanding = () => {
         </div>
       </footer>
     </div>
-    </CloudinaryContext>
   );
 };
 
