@@ -1,10 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import ArogyaSetuLandingPage from './App.tsx'
+import App from './App'
+import { BrowserRouter as Router } from 'react-router-dom';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ArogyaSetuLandingPage />
+    <Router>
+    <App />
+    </Router>
   </StrictMode>,
 )
