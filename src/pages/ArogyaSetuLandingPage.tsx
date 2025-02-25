@@ -5,6 +5,16 @@ import { Card, CardContent } from '@/components/ui/card';
 import { MessageCircle, Brain, Shield, Phone, Heart, Award, Activity, Zap, Clock, Smartphone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+// Move constants to top level
+const phoneNumber = "918401372294";
+const message = encodeURIComponent("Hi, I'd like to try Arogya Setu health service.");
+const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+// Create redirect handler
+const handleWhatsAppRedirect = () => {
+  window.location.href = whatsappUrl;
+};
+
 // Move interfaces
 interface FeatureCardProps {
   icon: React.ComponentType<{ className?: string }>;
@@ -284,6 +294,7 @@ const HealthJourneyMap = () => {
             size="lg"
             className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700
             text-white text-lg px-8 py-6 rounded-xl shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
+            onClick={handleWhatsAppRedirect}
           >
             <Smartphone className="mr-2 h-5 w-5" /> Experience Arogya Setu Now
           </Button>
@@ -301,7 +312,8 @@ const ArogyaSetuLanding = () => {
     { name: "Neil Patel", role: "Text-to-Speech Integration Lead" },
     { name: "Jenish Vamja", role: "Requirements & Deployment Lead" }
   ];
-
+ 
+  
   // Cloudinary public ID for the team image
   const teamImagePublicId = "pnjtnljjphkhqvfpp5ao";
 
@@ -335,8 +347,7 @@ const ArogyaSetuLanding = () => {
               size="lg"
               className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700
               text-white text-lg px-8 py-6 rounded-xl shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
-              onClick={() => navigate('/redirect')}
-
+              onClick={handleWhatsAppRedirect}
             >
               <Phone className="mr-2 h-5 w-5" /> Try on WhatsApp
             </Button>
@@ -344,6 +355,7 @@ const ArogyaSetuLanding = () => {
               size="lg"
               variant="outline"
               className="border-purple-500/30 text-purple-400 hover:bg-purple-500/10 text-lg px-8 py-6 rounded-xl"
+              onClick={() => navigate('/demo')}
             >
               <MessageCircle className="mr-2 h-5 w-5" /> Watch Demo
             </Button>
@@ -526,6 +538,7 @@ const ArogyaSetuLanding = () => {
               size="lg"
               className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700
               text-white text-lg px-8 py-6 rounded-xl shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
+              onClick={handleWhatsAppRedirect}
             >
               <Phone className="mr-2 h-5 w-5" /> Add Arogya Setu on WhatsApp
             </Button>
