@@ -16,7 +16,7 @@ const DemoPlayer = () => {
   const [showVideo, setShowVideo] = useState(false);
   const intervalRef = useRef<number | null>(null);
   const phoneNumber = "918401372294"; // No + sign for the URL format
-const message = encodeURIComponent("Hi, I'd like to try Arogya Setu health service.");
+const message = encodeURIComponent("Hi, I am having headache");
 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 const handleWhatsAppRedirect = () => {
   window.location.href = whatsappUrl;
